@@ -30,5 +30,5 @@ EcoSet
 #calculating mean of individuals per site
 (3+5+9+15+40)/5
 
-#summary of the dataset
+#summary of the dataset -> function summary is the quickest way to do it = all univariate statistics for all the value in the data set
 summary(EcoSet)
