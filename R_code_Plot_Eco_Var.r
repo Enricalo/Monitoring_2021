@@ -43,4 +43,17 @@ plot(cadmium,lead)
 pairs(meuse)
 
 #EXERCISE
-#hot to pair only the elements part of the data set (cadmium,copper,lead and zinc)
+#how to pair only the elements part of the data set (cadmium,copper,lead and zinc). Remembrer to put the , (=start from here)
+pairs(meuse[,3:6])
+
+#you can do it with the names of the coloumns. ~ this means "=" in R
+pairs(~ cadmium + copper + lead + zinc, data = meuse)
+
+#change the colour
+pairs(meuse[,3:6], col="blue")
+
+#change shape
+pairs(meuse[,3:6], col="blue", pch=17)
+
+#change size
+pairs(meuse[,3:6], col="blue", pch=17, cex=3)
