@@ -24,3 +24,32 @@ bubble(meuse, "zinc")
 
 # Exercise: bubble lead in red
 bubble(meuse, "lead", main="lead concentration", col="red")
+
+#install ggplot and open it
+instal.packages("ggplot2")
+
+#build a new set
+#biofuels data set. array values "c"
+biofuels <- c(120,200,350,570,750)
+#enzimes data set
+oxydative <- c(1200,1300,21000,34000,50000)
+
+#build the table
+D<-data.frame (biofuels,oxydative)
+D
+
+#ggplot data.frame -> table and plot
+ggplot(D, aes(x=biofuels , y=oxydative)) + geom_point()
+
+#make it better
+ggplot(D, aes(x = biofuels, y = oxydative)) + geom_point(size = 5, col = "red")
+ggplot(D, aes(x = biofuels, y = oxydative)) + geom_line(size = 5, col = "red")
+ggplot(D, aes(x = biofuels, y = oxydative)) + geom_point(size = 5, col = "red")  +  geom_line()
+ggplot(D, aes(x = biofuels, y = oxydative)) + geom_polygon()
+
+## IMPORT DATA FROM AN EXTERNAL SOURCE (set working directory("disc:/name of the folder/")
+setwd("C:/LAB_2020_2021/")
+
+#import dataset from outside -> read.table("name of the file", header=TRUE)
+covid<-read.table("covid_agg.csv", header=TRUE)
+head(covid)
