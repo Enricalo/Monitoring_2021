@@ -27,6 +27,7 @@ bubble(meuse, "lead", main="lead concentration", col="red")
 
 #install ggplot and open it
 instal.packages("ggplot2")
+library(ggplot2")
 
 #build a new set
 #biofuels data set. array values "c"
