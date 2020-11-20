@@ -27,7 +27,7 @@ bubble(meuse, "lead", main="lead concentration", col="red")
 
 #install ggplot and open it
 instal.packages("ggplot2")
-library(ggplot2")
+library(ggplot2)
 
 #build a new set
 #biofuels data set. array values "c"
@@ -51,6 +51,17 @@ ggplot(D, aes(x = biofuels, y = oxydative)) + geom_polygon()
 ## IMPORT DATA FROM AN EXTERNAL SOURCE (set working directory("disc:/name of the folder/")
 setwd("C:/LAB_2020_2021/")
 
-#import dataset from outside -> read.table("name of the file", header=TRUE)
+#import dataset from outside -> read.table("name of the file", header=TRUE) 
+#header=TRUE we tell R that the first row is made by the name of each column #header=FALSE the data start from the first row
 covid<-read.table("covid_agg.csv", header=TRUE)
 head(covid)
+summary(covid)
+
+#make use of ggplot
+#first, choose the library. then ask for the graph. lon and lat are the name of the columns, and the coordinates of our data
+library(ggplot2)
+ggplot(covid, aes(x=lon, y=lat)) + geom_point()
+
+#change the size of the graph, according to the amount of data for each point
+ggplot(covid, aes(x=lon, y=lat, size=cases)) + geom_point()
+
