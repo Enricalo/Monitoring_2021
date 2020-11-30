@@ -111,3 +111,21 @@ plot(Spoints, cex=Spoints$cases/10000, col = 'purple3', lwd = 3, add=T)
 library(rgdal)
 coastlines <- readOGR("ne_10m_coastline.shp")
 plot(coastlines, add=T)
+
+#new exercise
+#dati zabotti (external source)
+# setwd("C:/lab/")
+setwd("C:/LAB_2020_2021/")
+leo <- read.table("dati_zabotti.csv", header=T, sep=",")
+head(leo)
+attach(leo)
+library(spatstat)
+summary(leo)
+#plot point pattern analysis
+#min and max for every coordinate should be lower and higher than le lowest and the highest value of each coordinate
+leo_ppp <- ppp(x, y, c(2300000,2325000), c(5005000,5045000))
+
+#density map
+density_map <- density(leo_ppp)
+plot(density_map)
+points(leo_ppp)
