@@ -129,3 +129,83 @@ leo_ppp <- ppp(x, y, c(2300000,2325000), c(5005000,5045000))
 density_map <- density(leo_ppp)
 plot(density_map)
 points(leo_ppp)
+
+####
+#load an old file
+setwd("C:/LAB_2020_2021/")
+load("30_11_2020_lesson") #name of the file in lab folder
+
+#make use of spatstat
+library(spatstat)
+# set and attach the dataset
+attach(leo)
+# last lesson we plot the points, so we can recall it
+marks(leo_ppp) <- chlh
+#have colorful map
+chlh_map <- Smooth(leo_ppp) 
+plot(chlh_map)
+points(leo_ppp)
+
+#change colors
+cl <- colorRampPalette(c('yellow','orange','red','green'))(100)
+plot(chlh_map, col=cl)
+points(leo_ppp)
+
+#exercise: sediments
+marks(leo_ppp) <- chls
+chls_map <- Smooth(leo_ppp) 
+plot(chls_map)
+points(leo_ppp)
+
+#back to lesson
+library(spatstat)
+attach(leo)
+marks(leo_ppp) <- chlh
+chlh_map <- Smooth(leo_ppp)
+cl <- colorRampPalette(c('yellow','orange','red','green'))(100)  
+plot(chlh_map, col=cl)
+points(leo_ppp)
+
+marks(leo_ppp) <- chls
+chls_map <- Smooth(leo_ppp)
+cl <- colorRampPalette(c('yellow','orange','red','green'))(100)  
+plot(chls_map, col=cl)
+points(leo_ppp)
+
+# multipanel
+par(mfrow=c(1,3))
+# first graph: density map
+plot(density_map, col=cl)
+points(leo_ppp)
+#second graph: chlorop. map
+plot(chlh_map, col=cl)
+points(leo_ppp)plot(chlh_map, col=cl)
+    # third graph
+plot(chls_map, col=cl)
+points(leo_ppp)
+points(leo_ppp)
+
+# Exercise: build a multipanel with 3 rows and 1 column
+# multipanel
+par(mfrow=c(3,1))
+
+ 
+
+# first graph: density map
+plot(density_map, col=cl)
+points(leo_ppp)
+
+ 
+
+# second graph
+plot(chlh_map, col=cl)
+points(leo_ppp)
+
+ 
+
+# third graph
+plot(chls_map, col=cl)
+points(leo_ppp)
+
+ 
+ 
