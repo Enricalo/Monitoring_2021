@@ -1,4 +1,4 @@
-# R spacial
+# R spatial
 library(sp)
 data(meuse)
 head(meuse)
