@@ -1,0 +1,195 @@
+library(rgeos)
+library(raster)
+library(rgdal)
+library(dismo)
+library(readr)
+library(ggplot2)
+library(ncdf4)
+
+setwd("C:/LAB_2020_2021/")
+
+#first graph wolf distribution 2010-2015
+wolf1015 <- read_delim("canislupus1015.csv", "\t", escape_double = FALSE, trim_ws = TRUE)
+
+#alternative library(maptools)
+#data("wrld_simpl")
+#plot(wrld_simpl)
+#plot(wrld_simpl, xlim=c(10,15), ylim=c(36,48), axes=T)
+#mappa poco precisa
+
+#recall geographic data from raster package
+#altitude data, crop map on Italy
+IT<-getData('alt', country='IT', mask=TRUE, col=cl)
+#change colors to look like a geographical map on a book
+cl1 <- colorRampPalette(c('darkolivegreen2','darkolivegreen4','gold4','sienna1', 'chocolate4', 'brown', 'brown4', 'orangered4','grey58', 'white'))(100) #
+#plot new colors and name
+plot(IT, col=cl1, , main="wolf_2010_2015")
+#plot points about wolfs occurence data in Italy from 2010 to 2015
+wolf_2010_2015<-points(wolf1015$decimalLongitude, wolf1015$decimalLatitude, col="yellow", pch=19, cex = 0.5)
+
+#second graph wolf distribution 2018-2020
+
+wolf1820 <- read_delim("canislupus1820.csv", "\t", escape_double = FALSE, trim_ws = TRUE)
+
+#recall geographic data from raster package
+#altitude data, crop map on Italy
+#IT<-getData('alt', country='IT', mask=TRUE, col=cl)
+#change colors to look like a geographical map on a book
+#cl1 <- colorRampPalette(c('darkolivegreen2','darkolivegreen4','gold4','sienna1', 'chocolate4', 'brown', 'brown4', 'orangered4','grey58', 'white'))(100) #
+#plot new colors
+plot(IT, col=cl1, main="wolf_2018_2020")
+#plot points about wolfs occurence data in Italy from 2010 to 2015
+points(wolf1820$decimalLongitude, wolf1820$decimalLatitude, col="pink", pch=19, cex = 0.5)
+
+#compare and save picture
+png("wolf_occurences_2010_2020.png")
+par(mfrow=c(1,2))
+
+plot(IT, col=cl1, , main="wolf_2010_2015")
+points(wolf1015$decimalLongitude, wolf1015$decimalLatitude, col="yellow", pch=19, cex = 0.5, main="wolf_2010_2015")
+
+plot(IT, col=cl1, main="wolf_2018_2020")
+points(wolf1820$decimalLongitude, wolf1820$decimalLatitude, col="pink", pch=19, cex = 0.5, main="wolf_2018_2020")
+
+
+###
+#plot preys during the years
+
+#plot wild boars 2010 2015
+boar1015 <- read_delim("susscrofa1015.csv", "\t", escape_double = FALSE, trim_ws = TRUE)
+
+#recall geographic data from raster package
+#altitude data, crop map on Italy
+
+plot(IT, col=cl1, main="wild_boar_prey_2010_2015")
+#plot points about wolfs occurence data in Italy from 2010 to 2015
+points(boar1015$decimalLongitude, boar1015$decimalLatitude, col="yellow", pch=17, cex = 0.5)
+
+#plot wild boars 2018 2020
+boar1820 <- read_delim("susscrofa1820.csv", "\t", escape_double = FALSE, trim_ws = TRUE)
+
+#recall geographic data from raster package
+#altitude data, crop map on Italy
+
+plot(IT, col=cl1, main="wild_boar_prey_2018_2020")
+#plot points about wolfs occurence data in Italy from 2010 to 2015
+points(boar1820$decimalLongitude, boar1820$decimalLatitude, col="pink", pch=17, cex = 0.5)
+
+#par and save picture
+png("boar_occurences_2010_2020.png")
+par(mfrow=c(1,2))
+
+plot(IT, col=cl1, main="wild_boar_prey_2010_2015")
+points(boar1015$decimalLongitude, boar1015$decimalLatitude, col="yellow", pch=17, cex = 0.5)
+
+plot(IT, col=cl1, main="wild_boar_prey_2018_2020")
+points(boar1820$decimalLongitude, boar1820$decimalLatitude, col="pink", pch=17, cex = 0.5)
+
+dev.off()
+
+
+
+#plot deers 2010 2015
+deer1015 <- read_delim("cervelaph1015.csv", "\t", escape_double = FALSE, trim_ws = TRUE)
+
+#recall geographic data from raster package
+#altitude data, crop map on Italy
+
+plot(IT, col=cl1, main="deer_prey_2010_2015")
+#plot points about wolfs occurence data in Italy from 2010 to 2015
+points(deer1015$decimalLongitude, deer1015$decimalLatitude, col="yellow", pch=17, cex = 0.5)
+
+#plot deers 2018 2020
+deer1820 <- read_delim("cervelaph1820.csv", "\t", escape_double = FALSE, trim_ws = TRUE)
+
+#recall geographic data from raster package
+#altitude data, crop map on Italy
+
+plot(IT, col=cl1, main="deer_prey_2018_2020")
+#plot points about wolfs occurence data in Italy from 2010 to 2015
+points(cervelaph1820$decimalLongitude, cervelaph1820$decimalLatitude, col="pink", pch=17, cex = 0.5)
+
+#par and save picture
+png("deer_occurences_2010_2020.png")
+par(mfrow=c(1,2))
+
+plot(IT, col=cl1, main="deer_prey_2010_2015")
+points(deer1015$decimalLongitude, deer1015$decimalLatitude, col="yellow", pch=17, cex = 0.5)
+
+plot(IT, col=cl1, main="deer_prey_2018_2020")
+points(cervelaph1820$decimalLongitude, cervelaph1820$decimalLatitude, col="pink", pch=17, cex = 0.5)
+
+dev.off()
+
+####
+#plot the spatial extent of vegetation cover
+#download copernicus data FCOVER May 2010 and May 2020
+#plot the data
+
+FCOVER2010 <- raster("c_gls_FCOVER_201005240000_GLOBE_VGT_V1.4.1.nc")
+cl2 <- colorRampPalette(c('grey58','tan','tan3','sienna','darkolivegreen2','darkolivegreen4','darkgreen'))(100) #
+plot(FCOVER2010, col=cl2, main="VegetationIndex_2010")
+ext <- c(0,20,35,55) # xmin xmax ymin ymax
+FCOVER2010_Italy <- crop(FCOVER2010, ext)
+plot(FCOVER2010_Italy, col=cl2)
+#save a picture
+png("FCOVER2010.png")
+plot(FCOVER2010_Italy, col=cl2, main="VegetationIndex_2010")
+dev.off()
+
+
+FCOVER2020 <- raster("c_gls_FCOVER_202005240000_GLOBE_PROBAV_V1.5.1.nc")
+cl2 <- colorRampPalette(c('grey58','tan','tan3','sienna','darkolivegreen2','darkolivegreen4','darkgreen'))(100) #
+plot(FCOVER2020, col=cl2, main="VegetationIndex_2020")
+ext <- c(0,20,35,55) # xmin xmax ymin ymax
+FCOVER2020_Italy <- crop(FCOVER2020, ext)
+plot(FCOVER2010_Italy, col=cl2)
+#save a picture
+png("FCOVER2020.png")
+plot(FCOVER2020_Italy, col=cl2, main="VegetationIndex_2020")
+dev.off()
+
+cldif<-colorRampPalette(c('grey58','sienna1','green4','yellow','white'))(100) #
+difV<- FCOVER2010_Italy - FCOVER2020_Italy
+plot(difV, col=cldif, main="VegetationIndex_changes_10years")
+
+
+#compare and save picture
+png("final_considerations_2010_2020.png")
+par(mfrow=c(2,4))
+
+#wolf
+plot(IT, col=cl1, , main="wolf_2010_2015")
+points(wolf1015$decimalLongitude, wolf1015$decimalLatitude, col="yellow", pch=19, cex = 0.5, main="wolf_2010_2015")
+
+#boar
+plot(IT, col=cl1, main="wild_boar_prey_2010_2015")
+points(boar1015$decimalLongitude, boar1015$decimalLatitude, col="yellow", pch=17, cex = 0.5)
+
+#deer
+plot(IT, col=cl1, main="deer_prey_2010_2015")
+points(deer1015$decimalLongitude, deer1015$decimalLatitude, col="yellow", pch=17, cex = 0.5)
+
+#vegetation
+plot(FCOVER2010, col=cl2, main="VegetationIndex_2010")
+
+##
+#second row 2020
+
+#wolf
+plot(IT, col=cl1, main="wolf_2018_2020")
+points(wolf1820$decimalLongitude, wolf1820$decimalLatitude, col="pink", pch=19, cex = 0.5, main="wolf_2018_2020")
+
+#boar
+plot(IT, col=cl1, main="wild_boar_prey_2018_2020")
+points(boar1820$decimalLongitude, boar1820$decimalLatitude, col="pink", pch=17, cex = 0.5)
+
+#deer
+plot(IT, col=cl1, main="deer_prey_2018_2020")
+points(cervelaph1820$decimalLongitude, cervelaph1820$decimalLatitude, col="pink", pch=17, cex = 0.5)
+
+#vegetation
+plot(FCOVER2020, col=cl2, main="VegetationIndex_2020")
+
+dev.off()
+
