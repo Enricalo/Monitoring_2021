@@ -163,22 +163,22 @@ dev.off ()
 #plot the data
 
 FCOVER2010 <- raster("c_gls_FCOVER_201005240000_GLOBE_VGT_V1.4.1.nc")
-cl2 <- colorRampPalette(c('grey58','tan','tan3','sienna','darkolivegreen2','darkolivegreen4','darkgreen'))(100) #
+cl2 <- colorRampPalette(c('tan2','tan4','sienna','darkolivegreen2','darkolivegreen4','darkgreen'))(100) #
 plot(FCOVER2010, col=cl2, main="VegetationIndex_2010")
 ext <- c(0,20,35,55) # xmin xmax ymin ymax
 FCOVER2010_Italy <- crop(FCOVER2010, ext)
-plot(FCOVER2010_Italy, col=cl2)
+plot(FCOVER2010_Italy, col=cl2, , main="VegetationIndex_2010")
 #save a picture
 png("FCOVER2010.png")
 plot(FCOVER2010_Italy, col=cl2, main="VegetationIndex_2010")
 dev.off()
 
 FCOVER2020 <- raster("c_gls_FCOVER_202005240000_GLOBE_PROBAV_V1.5.1.nc")
-cl2 <- colorRampPalette(c('grey58','tan','tan3','sienna','darkolivegreen2','darkolivegreen4','darkgreen'))(100) #
+cl2 <- colorRampPalette(c('tan2','tan4','sienna','darkolivegreen2','darkolivegreen4','darkgreen'))(100) #
 plot(FCOVER2020, col=cl2, main="VegetationIndex_2020")
 ext <- c(0,20,35,55) # xmin xmax ymin ymax
 FCOVER2020_Italy <- crop(FCOVER2020, ext)
-plot(FCOVER2010_Italy, col=cl2)
+plot(FCOVER2020_Italy, col=cl2, , main="VegetationIndex_2020")
 #save a picture
 png("FCOVER2020.png")
 plot(FCOVER2020_Italy, col=cl2, main="VegetationIndex_2020")
@@ -186,12 +186,12 @@ dev.off()
 
 #differences between the two images
 #Was there any increase in vegetation cover?
-cldif<-colorRampPalette(c('grey58', 'sienna4','green4', 'chartreuse4', 'gold', 'yellow', 'white'))(100) #
+cldif<-colorRampPalette(c('grey58', 'sienna4', 'green4', 'orange', 'gold', 'yellow'))(100) #
 difV<- FCOVER2010_Italy - FCOVER2020_Italy
 plot(difV, col=cldif, main="VegetationIndex_changes_10years")
 #save a picture
 png("difference_FCOVER.png")
-plot(FCOVER2020_Italy, col=cl2, main="VegetationIndex_2020")
+plot(difV, col=cldif, main="VegetationIndex_changes_10years")
 dev.off()
 
 
