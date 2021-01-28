@@ -75,7 +75,7 @@ boar1015 <- read_delim("susscrofa1015.csv", "\t", escape_double = FALSE, trim_ws
 #altitude data, crop map on Italy
 
 plot(IT, col=cl1, main="wild_boar_prey_2010_2015")
-#plot points about wolfs occurence data in Italy from 2010 to 2015
+#plot points about boars occurence data in Italy from 2010 to 2015
 points(boar1015$decimalLongitude, boar1015$decimalLatitude, col="turquoise1", pch=17, cex = 0.7, main="boar_2010_2015")
 
 #plot wild boars 2018 2020
@@ -85,7 +85,7 @@ boar1820 <- read_delim("susscrofa1820.csv", "\t", escape_double = FALSE, trim_ws
 #altitude data, crop map on Italy
 
 plot(IT, col=cl1, main="wild_boar_prey_2018_2020")
-#plot points about wolfs occurence data in Italy from 2010 to 2015
+#plot points about boars occurence data in Italy from 2010 to 2015
 points(boar1820$decimalLongitude, boar1820$decimalLatitude, col="black", pch=17, cex = 0.7, main="boar_2018_2020")
 
 #compare
@@ -120,7 +120,7 @@ deer1015 <- read_delim("cervelaph1015.csv", "\t", escape_double = FALSE, trim_ws
 #altitude data, crop map on Italy
 plot(IT, col=cl1, main="deer_prey_2010_2015")
 
-#plot points about wolfs occurence data in Italy from 2010 to 2015
+#plot points about deers occurence data in Italy from 2010 to 2015
 points(deer1015$decimalLongitude, deer1015$decimalLatitude, col="turquoise1", pch=17, cex = 0.7, main="deer_2010_2015")
 
 #plot deers 2018 2020
@@ -130,7 +130,7 @@ deer1820 <- read_delim("cervelaph1820.csv", "\t", escape_double = FALSE, trim_ws
 #altitude data, crop map on Italy
 plot(IT, col=cl1, main="deer_prey_2018_2020")
 
-#plot points about wolfs occurence data in Italy from 2010 to 2015
+#plot points about deers occurence data in Italy from 2010 to 2015
 points(deer1820$decimalLongitude, deer1820$decimalLatitude, col="black", pch=17, cex = 0.7, main="deer_2018_2020")
 
 #compare 
